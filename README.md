@@ -26,7 +26,7 @@ looneyTunes.sh grade >> will run the grade script
 * Schedule a daily task that creates a sign in log as the user Ralph at 6AM Monday thru Friday. This should run the date command and append to the file /home/Sam/MorninRalph
 
 **find**
-Find all files (not special or hidden) owned by user Gossamer on the copy system and copy them to the directory /root/GossamerFiles
+* Find all files (not special or hidden) owned by user Gossamer on the copy system and copy them to the directory /root/GossamerFiles
 
 **grep**
-Log files are making me AnGry! Find all lines in the file **/var/log/secure** that contain the word angry, regardless of case and copy the lines to the file /root/VeryAngry.txt
+* Log files are making me AnGry! Find all lines in the file **/var/log/secure** that contain the word angry, regardless of case and copy the lines to the file /root/VeryAngry.txt
