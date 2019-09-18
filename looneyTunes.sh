@@ -41,16 +41,41 @@ function create_users() {
   useradd -s /sbin/nologin Gossamer
 }
 
-# Merge lines from .marvins &.log to /var/log/secure
+function ascii_art() {
+cat > $(pwd)/\.marvins <<write_ASCII
+angry           ||||||||||||,,
+anGry            |WWWWWWWWW|W|||,
+angry            |_________|~WWW||,
+angRy             ~-_      ~_  ~WW||,
+angry             __-~---__/ ~_  ~WW|,
+anGry         _-~~         ~~-_~_  ~W
+angry   _--~~~~~~~~~~___       ~-~_/
+anGry  -                ~~~--_   ~_
+angry |                       ~_   |
+angRy |   ____-------___        -_  |
+angry |-~~              ~~--_     - |
+anGry  ~| ~--___________     |-_   ~_
+aNgry    | \`~'/  \`~'_-~~  |  |~-_-
+angry   _-~_~~~    ~~~   _-~  |  |
+angRy  ---.--__         ---.-~  |
+angry  | |    -~~-----~~| |    -
+aNgry  |_|__-~          |_|__-~
+write_ASCII
+}
+
+# Merge lines from .marvins & random generated text to /var/log/secure
 function marvin() {
-  while IFS= read -r file1 <&3 && read file2 <&4
+  while IFS= read -r file1 <&3
     do
       echo "$file1" >> /var/log/secure #  Must have quotes around var 
        for i in {1..5}; do             #+ to keep whitespace intact!
-         echo $file2 >> /var/log/secure
+         local dateTime=$(date +"%a %d %T")  #  Add authentic log date+time stamp
+         #  Generate random text to go inbetween each line of ascii_art()
+         local randText=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 56 | head -n 1)
+         echo "$dateTime localhost sshd[9152] $randText" >> /var/log/secure
        done
 # Change location of input files if necessary
-  done 3<$(pwd)/\.marvins 4<$(pwd)/\.log
+  done 3<$(pwd)/\.marvins
 }
 
 function hide_files() {
@@ -350,9 +375,10 @@ fi
 case $1 in
   setup )
         create_users
+        ascii_art
         marvin
         hide_files
-        echo "Setup complete. Please refer to instructions to begin homework"
+        echo "Setup complete. Please refer to instructions to begin work"
         ;;
   grade )
         lab_grade
@@ -364,5 +390,3 @@ case $1 in
         usage
         ;;
 esac
-
-                                      
