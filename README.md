@@ -1,10 +1,6 @@
 # looneyTunes
 A bash shell script written for setting up and subsequently grading a Linux workshop. This is geared towards getting familiar with creating users/groups, setting passwords, setting up cron jobs, using the find command, using grep and output redirection
 
-# Requirements
-function_marvin() requires two files to be present in the same directory: .marvins and .log
-This is in order to copy their content to /var/log/secure for one of the tasks
-
 # Recommendation
 This script creates a number of users and will place lines in to /var/log/secure! It is recommended to be used with a VirtualMachine for ease of reset
 
